@@ -1,0 +1,6 @@
+singleton1：懒汉单例
+singleton2：加锁懒汉单例
+singleton3：双重加锁检测懒汉时单例
+singleton4：饿汉式单例
+singleton5：静态内部类单例
+singleton6：枚举式单例
