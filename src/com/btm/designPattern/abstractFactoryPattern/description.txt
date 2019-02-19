@@ -1,0 +1,34 @@
+抽象工厂模式：
+    总结：根据实现工厂的不同，返回一组不同的接口实现。
+
+抽象工厂模式，是在工厂模式的基础上发展出来的。简单工厂模式只是简单的返回一个产品，而抽象工厂模式是一次返回一组相关联的产品。
+
+建议源码阅读顺序：
+    twoProductTwoFactory → twoProductThreeFactory → threeProductTwoFactory
+
+创建：
+以twoProductTwoFactory为例：
+第一步声明基础接口，描述要什么，本示例中有两个声明，分别对应此示例中的Keyboard、Mouse接口。
+第二步声明基础接口的实现，描述所需要的东西具体如何实现，就是编写相应的代码。本示例中共有两组实现，本别对应此示例中的DellKeyboard、DellMouse和HPKeyboard、HPMouse实现类。
+第三步声明一个抽象工厂类，描述具体的工厂类要提供哪些东西。对应此示例中的AbstractFactory抽象类。
+第四步声明抽象工厂的继承类，描述抽象工厂所要提供的东西如何实现。本示例中有两个具体的工厂类，分别对应此示例中的DellFactory、HPFactory类,每个具体工厂类中同时提供Mouse和Keyboard的实例对象。
+
+使用：
+以twoProductTwoFactory为例：
+在main方法中，用要使用的具体工厂实例化抽象工厂类，使用抽象工厂类对象即可调用不同的工厂实现的方法。
+要替换不同的实现，只需替换实例化抽象类的具体工厂类就可以。
+
+什么是产品族？什么是产品等级？
+产品等级就是同一个基础接口的不同实现，对应本示例中的DellMouse、HPMouse、AsusMouse是一个产品等级，DellKeyboard、HPKeyboard、AsusKeyboard是一个产品等级，DellMic、HPMic、AsusMic是一个产品等级。
+产品族就是不同的基础接口的具体实现，对应本示例中的DellMouse、DellKeyboard、DellMic是一个产品族，HPMouse、HPKeyboard、HPMic是一个产品族，AsusMouse、Asus Keyboard、AsusMic是一个产品族。
+
+为什么说抽象工厂模式是“产品族难扩展，产品等级易扩展”的？
+拓展一个产品族，相当与增加一个所需要的具体事物（以twoProductTwoFactory与threeProductTwoFactory比较进行说明）：
+第一步要增加一个基础接口，描述新增加的施什么，对应threeProductTwoFactory中的Mic接口。
+第二步针对新增加的基础接口，对照不同的工厂实现，分别对新增加的接口进行实现，对应threeProductTwoFactory中的DellMic、HPMic实现类。
+第三步修改抽象工厂类，将新增加的基础接口添加进去，对应threeProductTwoFactory中的AbstractFactory的createMic()方法。
+第四步修改具体工厂类，将抽象类中新增加加的方法的实现添加进去，对应threeProductTwoFactory中的DellFactory和HPFactory中的createMic()方法。
+
+拓展一个产品等级，相当于增加一个具体实现工厂（以twoProductTwoFactory与twoProductThreeFactory比较进行说明）：
+第一步针对所有的基础接口，编写新的实现类，对应twoProductThreeFactory中的AsusKeyboard和AsusMouse实现类。
+第二步编写新的继承抽象工厂的实现类，返回新编写的基础接口的实现类的对象，对应twoProductThreeFactory中的AsusFactory类。
